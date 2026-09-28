@@ -154,21 +154,49 @@ footer{border-top:1px solid var(--line);margin:2rem auto 0;max-width:1120px;padd
 .sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:.7rem;margin:1.1rem 0}
 .swb{aspect-ratio:1;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0;transition:.2s}.swb:hover{transform:scale(1.06)}.swb.on{border-color:var(--crust);box-shadow:0 0 0 3px var(--accs)}
 </style>
+<style id="v5">
+[hidden]{display:none!important}.c-Lesson{--cc:#DCD3F2}.badge+.badge{margin-left:.9rem}
+.brand{background:none;border:0;padding:0;cursor:pointer;color:inherit;text-align:left}
+.top #set{width:34px;height:34px;min-height:0;padding:0;margin:0;border-radius:50%;background:none;border:1px solid var(--line);color:var(--mut);display:grid;place-items:center;font-weight:400}
+.top #set:hover,.top #set.on{color:var(--crust);border-color:var(--crust)}
+.grid.v-list{display:flex;flex-direction:column;gap:.8rem}
+.grid.v-list .card{display:grid;grid-template-columns:110px 1fr;gap:1rem;align-items:center;padding:.6rem;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+.grid.v-list .cov{aspect-ratio:1;width:110px}.grid.v-list .cb{padding:0}
+.grid.v-compact{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:1.2rem .9rem}.grid.v-compact .cb h3{font-size:1.05rem}
+body.sans h1,body.sans h2,body.sans h3,body.sans .brand,body.sans .stats b,body.sans .facts span{font-family:"Be Vietnam Pro",system-ui,sans-serif;font-weight:700}
+.set h2{margin-top:1.8rem}.emo{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}.emo .chip{font-size:1.4rem;padding:.2rem .6rem}
+.fpv{border-radius:10px;border:1px solid var(--line)}.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.2rem 1rem}
+@media (min-width:761px) and (max-width:1100px){main{padding:1.4rem}.grid{grid-template-columns:repeat(3,1fr)}.grid.v-compact{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:760px){
+.top{padding:.6rem .9rem;gap:.5rem;backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
+.brand{font-size:1.2rem}.top #th,.top #set{order:2;width:40px;height:40px}
+nav{order:3;width:100%;overflow-x:auto;gap:0}nav .btn{margin:0 1rem 0 0;white-space:nowrap;min-height:44px}
+#new{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:6;box-shadow:var(--sh);padding:.9rem 1.3rem!important}
+main{padding:1rem .9rem 5.5rem}.hero{padding-top:1.2rem}.lnk{position:static;margin:.6rem 0}
+.grid{grid-template-columns:repeat(2,1fr);gap:1.2rem .8rem}.cb h3{font-size:1.1rem}
+.grid.v-compact{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.grid.v-list .card{grid-template-columns:88px 1fr;gap:.8rem}.grid.v-list .cov{width:88px}
+.two{grid-template-columns:1fr}.ing{grid-template-columns:1fr 78px 56px 40px}
+.row>.btn,.row>label.btn,.nag .btn,footer .btn,footer label.btn{padding:.7rem 1.2rem}
+.chip,.tb button{min-height:40px}.facts span{padding:.6rem 1.2rem .6rem 0;font-size:1.1rem}.stats{gap:1.4rem}
+}
+</style>
 </head>
 <body>
 <div id="bgl" aria-hidden="true"></div>
 <header class="top">
-  <div class="brand">Sổ tay <i>làm bánh</i></div>
+  <button class="brand" id="brand" data-a="home"></button>
   <nav><button class="btn" data-a="tab" data-id="recipes">Công thức</button><button class="btn" data-a="tab" data-id="lessons">Bài học</button><button class="btn" id="gnav" data-a="gal">Thư viện ảnh</button></nav>
   <button class="btn pri" id="new" data-a="new"></button>
   <button class="btn" id="th" data-a="theme"></button>
+  <button class="btn" id="set" data-a="set" aria-label="Cài đặt" title="Cài đặt">⚙</button>
 </header>
 <div id="pend"></div>
 <main id="app"></main>
 <footer>
   <button class="btn" data-a="export">Xuất bản sao lưu</button>
   <span class="note" id="bk"></span>
-  <label class="btn">Nhập bản sao lưu<input type="file" id="imp" accept=".json,application/json" hidden></label>
+  <label class="btn">Nhập JSON / CSV<input type="file" id="imp" accept=".json,.csv,text/csv,application/json" hidden></label>
 </footer>
 <div id="bgp" hidden><div class="bgc"><div class="bgh"><b>Hình nền trang chủ</b><button class="x" data-a="bgx" aria-label="Đóng">✕</button></div><div class="sw" id="sw"></div><div class="row"><label class="btn pri" style="cursor:pointer">Tải ảnh lên<input type="file" id="bgfile" accept="image/*" hidden></label><button class="btn" data-a="bgreset">Về mặc định</button></div><p class="note">Ảnh được làm mờ nhẹ để chữ dễ đọc.</p></div></div>
 <div id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh"><div class="lv" id="lv"></div><div class="lc"><button data-a="lbp" aria-label="Ảnh trước">←</button><input id="lbc" placeholder="Ghi chú cho ảnh" aria-label="Ghi chú"><select id="lbt" aria-label="Gắn vào công thức"></select><button data-a="lbd">Xóa</button><button data-a="lbn" aria-label="Ảnh sau">→</button><button data-a="lbx">Đóng</button></div></div>
@@ -210,7 +238,7 @@ else if(z)o+='<p>'+inl(z)+'</p>'}
 cl();return o}
 const gal=m=>m&&m.length?`<div class="gal">${m.map(x=>x.type=='video'?`<video src="${x.src}" controls playsinline></video>`:`<img src="${x.src}" alt="">`).join('')}</div>`:'';
 const cur=()=>(ui.tab=='recipes'?db.recipes:db.lessons).find(x=>x.id==ui.id);
-const key=x=>ui.tab=='recipes'?x.cat:x.tag;
+const key=x=>ui.tab=='recipes'?x.cat:'Lesson';
 
 
 /* v2 helpers */
@@ -224,7 +252,7 @@ function theme(n){let t='auto';try{t=n||localStorage.getItem('theme')||'auto';if
 const GUIDE=()=>({id:'guide-scale',title:'Cách scale công thức và Baker’s %',tag:'Techniques',ts:Date.now(),media:[],ca:'',cb:'',
 cmp:'Nguyên liệu|Gốc (g)|Baker’s %|Scale ×1,5 (g)\nBread flour|500|100%|750\nCold water|350|70%|525\nSalt|10|2%|15\nYeast|2|0,4%|3\nImprover|3|0,6%|4,5',
 body:'Baker’s % (phần trăm thợ làm bánh) tính mọi nguyên liệu theo khối lượng bột. Bột luôn là 100%, nên chỉ cần đổi lượng bột là cả công thức đổi theo.\n## Công thức\n- Baker’s % = khối lượng nguyên liệu ÷ tổng khối lượng bột × 100\n- Hệ số scale = lượng bột muốn dùng ÷ lượng bột trong công thức gốc\n- Khối lượng mới = khối lượng gốc × hệ số scale\n## Ví dụ: Baguette\nCông thức gốc dùng 500 g Bread flour, 350 g Cold water, 10 g Salt. Muốn dùng 750 g bột:\n- Hệ số = 750 ÷ 500 = 1,5\n- Cold water: 350 × 1,5 = 525 g (baker’s % vẫn là 350 ÷ 500 = 70%)\n- Salt: 10 × 1,5 = 15 g (10 ÷ 500 = 2%)\n- Thành phẩm 2 ổ baguette thì thành 2 × 1,5 = 3 ổ\n## Làm tròn\n- g và ml: dưới 10 làm tròn đến 0,1, từ 10 trở lên làm tròn số nguyên\n- Nguyên liệu đếm được (quả, cái): làm tròn đến 0,5\n! Với lượng rất nhỏ như men hay muối nên dùng cân tiểu ly. Khi nhân lên nhiều lần, thời gian ủ và nướng có thể cần chỉnh theo quan sát.'});
-function norm(d){d.settings=d.settings||{};d.gallery=d.gallery||[];d.sessions=d.sessions||{};d.meta=d.meta||{};if(!d.meta.guide){d.meta.guide=1;if(!d.lessons.some(l=>l.id=='guide-scale'))d.lessons.push(GUIDE())}d.recipes.forEach(r=>{r.links=r.links||[];r.made=r.made||[]});return d}
+function norm(d){d.settings=d.settings||{};d.gallery=d.gallery||[];d.sessions=d.sessions||{};d.meta=d.meta||{};if(!d.meta.guide){d.meta.guide=1;if(!d.lessons.some(l=>l.id=='guide-scale'))d.lessons.push(GUIDE())}d.recipes.forEach(r=>{r.links=r.links||[];r.made=r.made||[]});d.lessons.forEach(l=>{if(!Array.isArray(l.tags))l.tags=l.tag?[L[l.tag]||l.tag]:[]});return d}
 function facts(x){const f=fac(x),y=+x.yn?`<span>🍞 ${f!=1?'≈ ':''}${F(Math.round(x.yn*f*2)/2)} ${esc(x.yu||'')}</span>`:'',o=x.oven?`<span>🔥 ${esc(x.oven)}°C</span>`:'';return o||y?`<div class="facts">${o}${y}</div>`:''}
 function tbl(x){const fl=flr(x),f=fac(x),hn=x.ings.some(i=>i.note),e=x.ings.find(i=>!/flour/i.test(i.n)&&+i.a&&/^(g|ml)$/i.test(i.u));
 const calc=fl&&f!=1?`<p class="calc">Hệ số = ${F(ui.sc.g)} ÷ ${F(fl)} = ${F(f,2)}${e?` · ${esc(e.n)}: ${F(+e.a)} × ${F(f,2)} = ${scl(e,f)} ${esc(e.u)}`:''}</p>`:'';
@@ -233,7 +261,7 @@ function upd(){const x=cur();if(!x)return;$('#fct').innerHTML=facts(x);$('#scv')
 function nag(){const m=db.meta||{},d=m.lastBackup?Math.floor((Date.now()-m.lastBackup)/864e5):0,old=m.lastBackup?d>=7:(!m.created||Date.now()-m.created>2*864e5);
 return old?`<div class="warn nag"><span>💾 ${m.lastBackup?'Đã '+d+' ngày chưa sao lưu.':'Bạn chưa sao lưu lần nào.'} Dữ liệu chỉ nằm trong trình duyệt này, hãy xuất một bản để phòng khi mất dữ liệu.</span><button class="btn pri" data-a="export">Xuất bản sao lưu</button></div>`:''}
 function side(){const m=db.meta||{},n=ui.pend;$('#bk').textContent=m.lastBackup?'Sao lưu gần nhất: '+fdt(m.lastBackup):'Chưa sao lưu lần nào';
-$('#pend').innerHTML=n?`<div class="warn">Tệp đang chờ nhập có ${n.recipes.length} công thức, ${n.lessons.length} bài học. <button class="btn pri" data-a="impmg">Gộp thêm (giữ dữ liệu cũ)</button> <button class="btn dng" data-a="impok">Thay thế toàn bộ</button> <button class="btn" data-a="impno">Hủy</button></div>`:''}
+$('#pend').innerHTML=n?`<div class="warn">Tệp đang chờ nhập có ${n.recipes.length} công thức, ${n.lessons.length} bài học. <button class="btn pri" data-a="impmg">${n.csv?'Nhập vào (trùng tên thì cập nhật)':'Gộp thêm (giữ dữ liệu cũ)'}</button> ${n.csv?'':'<button class="btn dng" data-a="impok">Thay thế toàn bộ</button>'} <button class="btn" data-a="impno">Hủy</button></div>`:''}
 function prog(){const s=db.sessions[ui.id];if(!s||ui.view!='cook')return;const b=[...document.querySelectorAll('.ck2 input')],d=b.filter(e=>e.checked).length;$('#pb').style.width=(b.length?d/b.length*100:0)+'%';$('#pt').textContent=d+'/'+b.length+' mục đã tick'}
 function vCook(){const x=cur(),s=x&&db.sessions[x.id];if(!x||!s){ui.view='list';return vList()}
 const f=s.f||1,c=s.c||{},steps=(x.steps||'').split('\n').map(z=>z.trim()).filter(z=>z&&!/^(## |! )/.test(z)).map(z=>z.replace(/^(- |\d+[.)]\s)/,''));
@@ -244,11 +272,78 @@ return`<section class="doc"><div class="row"><button class="btn" data-a="cback">
 <div class="row"><button class="btn pri" data-a="done">✅ Đã hoàn thành</button></div></section>`}
 
 /* views */
+/* v5: settings, favicon, csv */
+const allTags=()=>[...new Set(db.lessons.flatMap(l=>l.tags||[]))].sort((a,b)=>a.localeCompare(b,'vi')),parseTags=v=>[...new Set(String(v).split(/[,;|]/).map(x=>x.replace(/["<>]/g,'').trim()).filter(Boolean))];
+EMO.Lesson='📖';
+const SD={b1:'Sổ tay',b2:'làm bánh',ic:{t:'e',v:'🥖'},hr:{e:'Sổ tay của bạn',t:'Hôm nay mình nướng gì nào?',d:'Công thức của bạn, kèm ảnh, video và ghi chú.'},hl:{e:'Kiến thức',t:'Tất cả những gì mình đã học',d:'Men starter, kỹ thuật, so sánh và mẹo hay.'},lay:'card',ac:'pink',fn:'serif'};
+const ST=()=>db.settings||{},B=k=>ST()[k]??SD[k],T=(w,k)=>(ST()[w]||{})[k]??SD[w][k],sv=k=>{const v=(ST().sh||{})[k];return v===undefined?k!='cOven':v};
+const SHOW=[['cBadge','Loại bánh / chủ đề','c'],['cDiff','Độ khó','c'],['cTime','Tổng thời gian','c'],['cDate','Ngày học','c'],['cMade','Số lần đã làm','c'],['cOven','Nhiệt độ lò','c'],['hStats','Thống kê ở đầu trang','h'],['hSearch','Ô tìm kiếm và sắp xếp','h'],['hChips','Bộ lọc theo loại','h'],['hBg','Nút “Đổi hình nền”','h'],['nGal','Tab Thư viện ảnh','h'],['nLes','Tab Bài học','h'],['nag','Nhắc sao lưu','h']];
+const EM=['🥖','🥐','🍞','🥯','🥨','🧁','🍰','🎂','🍪','🥧','🍩','🫓','🧈','🌾','🍓','👩‍🍳'];
+const AC={pink:['Hồng',['#C2547A','#F5B5C8','#F0A2BA','#FBE7EC','#F7C6D4'],['#F0A3BC','#E9A6BC','#F0B6C8','#3A2630','#E9A6BC']],
+caramel:['Caramel',['#9A5A1A','#F3CB8B','#EDBB6C','#FBEBD3','#F5D9A8'],['#E8B073','#E8B073','#F0C48F','#3A2D20','#E8B073']],
+matcha:['Matcha',['#4F7A55','#BFE0C4','#A9D3B0','#E4F2E6','#CDEBDD'],['#9BD0A3','#9BD0A3','#B3DEBA','#22322A','#9BD0A3']],
+lavender:['Oải hương',['#7C5BB0','#D6C8F0','#C7B5EA','#EEE8FA','#DCD3F2'],['#C3B0EB','#C3B0EB','#D3C4F1','#2E2740','#C3B0EB']],
+sky:['Xanh trời',['#3F79AE','#BBD8F3','#A5CAEC','#E4F0FB','#CFE3F7'],['#92C0EA','#92C0EA','#ABD0F0','#22303F','#92C0EA']],
+peach:['Đào',['#C2603A','#F8C7B0','#F3B296','#FCE8DE','#FBD5C4'],['#F0A688','#F0A688','#F5BBA2','#3C2A22','#F0A688']]};
+async function pset(k,v){db.settings[k]=v;await save()}
+const curTheme=()=>{try{return localStorage.getItem('theme')||'auto'}catch(e){return 'auto'}};
+function mkIcon(sz,bg){const ic=B('ic');if(ic.t=='i')return ic.src;const c=document.createElement('canvas');c.width=c.height=sz;const x=c.getContext('2d');if(bg){x.fillStyle=bg;x.fillRect(0,0,sz,sz)}
+x.font=`${sz*.78}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;x.textAlign='center';x.textBaseline='middle';x.fillText(ic.v,sz/2,sz*.54);return c.toDataURL('image/png')}
+function fav(){const k=JSON.stringify(B('ic'));if(fav.k===k)return;fav.k=k;const set=(rel,h,s)=>{let l=document.querySelector(`link[data-f="${rel}"]`);if(!l){l=document.createElement('link');l.rel=rel;l.dataset.f=rel;document.head.appendChild(l)}l.href=h;if(s)l.sizes=s};
+try{set('icon',mkIcon(64));set('apple-touch-icon',mkIcon(180,'#FFF8F6'),'180x180')}catch(e){}}
+async function sq(f){const src=await rd(f);return new Promise((ok,no)=>{const i=new Image();i.onload=()=>{const s=Math.min(i.width,i.height),c=document.createElement('canvas');c.width=c.height=192;c.getContext('2d').drawImage(i,(i.width-s)/2,(i.height-s)/2,s,s,0,0,192,192);ok(c.toDataURL('image/png'))};i.onerror=()=>no(Error('Không đọc được ảnh'));i.src=src})}
+function applyPrefs(){const b1=B('b1'),b2=B('b2');$('#brand').innerHTML=esc(b1)+(b2?' <i>'+esc(b2)+'</i>':'');document.title=(b1+' '+b2).trim()||'Sổ tay';
+$('#gnav').hidden=!sv('nGal');document.querySelector('[data-id=lessons]').hidden=!sv('nLes');document.body.classList.toggle('sans',B('fn')=='sans');$('#set').classList.toggle('on',ui.view=='set');
+const a=AC[B('ac')]||AC.pink,v=z=>`--crust:${z[0]};--pri:${z[1]};--pri2:${z[2]};--accs:${z[3]};--butter:${z[4]}`;let s=document.getElementById('dyn');if(!s){s=document.createElement('style');s.id='dyn';document.head.appendChild(s)}
+s.textContent=`:root{${v(a[1])}}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){${v(a[2])}}}:root[data-theme="dark"]{${v(a[2])}}`;fav()}
+function vSet(){const gv=k=>{const[a,b]=k.split('.');return b?T(a,b):B(a)},tx=(k,l)=>`<label>${l}<input data-s="${k}" value="${esc(gv(k))}"></label>`,
+ck=(k,l)=>`<label class="ck"><input type="checkbox" data-sh="${k}"${sv(k)?' checked':''}> ${l}</label>`,
+ch=(a,arr,cur)=>`<div class="chips">${arr.map(([k,l])=>`<button class="chip${k==cur?' on':''}" data-a="${a}" data-id="${k}">${l}</button>`).join('')}</div>`,ic=B('ic');
+return`<section class="hero"><span class="eyebrow">Tùy chỉnh</span><h1>Cài đặt</h1><p>Mọi thay đổi được lưu ngay trên thiết bị này.</p></section>
+<section class="doc f set"><h2>Tên trang và trang chủ</h2><div class="two">${tx('b1','Tên trang, phần 1')}${tx('b2','Tên trang, phần 2 (chữ nghiêng)')}</div>
+<h3>Trang Công thức</h3>${tx('hr.e','Dòng nhỏ phía trên')}${tx('hr.t','Tiêu đề lớn')}${tx('hr.d','Mô tả')}
+<h3>Trang Bài học</h3>${tx('hl.e','Dòng nhỏ phía trên')}${tx('hl.t','Tiêu đề lớn')}${tx('hl.d','Mô tả')}
+<h2>Icon của trang</h2><div class="row"><img class="fpv" src="${mkIcon(64)}" alt="" width="48" height="48"><span class="note">Hiện trên tab trình duyệt và khi thêm trang vào màn hình chính.</span></div>
+<div class="emo">${EM.map(e=>`<button class="chip${ic.t=='e'&&ic.v==e?' on':''}" data-a="emo" data-id="${e}" aria-label="${e}">${e}</button>`).join('')}</div>
+<div class="two"><label>Hoặc gõ / dán một emoji<input id="s-emo" placeholder="🥯" maxlength="8"></label><label>Hoặc tải ảnh riêng (tự cắt vuông)<input type="file" id="s-icf" accept="image/*"></label></div>
+<div class="row"><button class="btn" data-a="icreset">Về icon mặc định</button></div>
+<h2>Giao diện</h2><label>Kiểu hiển thị danh sách</label>${ch('lay',[['card','Thẻ ảnh'],['list','Danh sách'],['compact','Thẻ gọn']],B('lay'))}
+<label>Màu chủ đạo</label><div class="sw">${Object.keys(AC).map(k=>`<button class="swb${k==B('ac')?' on':''}" data-a="ac" data-id="${k}" title="${AC[k][0]}" aria-label="${AC[k][0]}" style="background:${AC[k][1][1]}"></button>`).join('')}</div>
+<label>Kiểu chữ tiêu đề</label>${ch('fn',[['serif','Có chân (Playfair)'],['sans','Không chân']],B('fn'))}
+<label>Chế độ sáng / tối</label>${ch('thm',[['auto','Theo hệ thống'],['light','Sáng'],['dark','Tối']],curTheme())}
+<div class="row"><button class="btn" data-a="bgo">🎨 Đổi hình nền</button></div>
+<h2>Hiển thị</h2><h3>Trên thẻ công thức</h3><div class="sg">${SHOW.filter(s=>s[2]=='c').map(s=>ck(s[0],s[1])).join('')}</div><h3>Trong trang</h3><div class="sg">${SHOW.filter(s=>s[2]=='h').map(s=>ck(s[0],s[1])).join('')}</div>
+<h2>Dữ liệu</h2><p class="note">JSON là bản sao lưu đầy đủ, có cả ảnh và video. CSV mở được bằng Excel hoặc Google Sheets nhưng không gồm ảnh và video. Trong CSV, mỗi nguyên liệu một dòng theo dạng: tên | số lượng | đơn vị | ghi chú.</p>
+<div class="row"><button class="btn" data-a="export">Xuất JSON</button><button class="btn" data-a="csvx">Xuất CSV</button><button class="btn" data-a="csvt">Tải CSV mẫu</button><label class="btn">Nhập JSON / CSV<input type="file" class="impf" accept=".json,.csv,text/csv,application/json" hidden></label></div>
+<div class="row"><button class="btn dng" data-a="rst">${ui.conf=='rst'?'Bấm lần nữa để đặt lại':'Đặt lại cài đặt'}</button></div></section>`}
+const CH=['id','type','name','category','difficulty','date_learnt','time','oven_c','yield_qty','yield_unit','ingredients','method','tips','comparison'];
+const cq=v=>{v=String(v??'');return /[",;\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+async function saveFile(n,data,mime){try{const dl=window.claude&&await window.claude.use('downloads');if(dl){await dl.save({filename:n,data});return 1}}catch(e){if(e&&e.code=='declined')return 0}
+try{const l=document.createElement('a');l.href=URL.createObjectURL(new Blob([data],{type:mime}));l.download=n;l.click();return 1}catch(e){return 0}}
+const csvText=rows=>'\uFEFF'+rows.map(r=>r.map(cq).join(',')).join('\r\n');
+async function exportCsv(){const rows=[CH];db.recipes.forEach(r=>rows.push([r.id,'recipe',r.name,r.cat,r.diff||'',r.date||'',r.time||'',r.oven||'',r.yn||'',r.yu||'',r.ings.map(i=>[i.n,i.a,i.u,i.note].filter((v,k)=>k<3||v).join(' | ')).join('\n'),r.steps||'',r.tips||'','']));
+db.lessons.forEach(l=>rows.push([l.id,'lesson',l.title,(l.tags||[]).join(', '),'','','','','','','',l.body||'','',l.cmp||'']));if(await saveFile('baking-notebook.csv',csvText(rows),'text/csv'))toast('Đã xuất CSV (không gồm ảnh và video)')}
+async function csvTemplate(){const rows=[CH,['','recipe','Brioche','Bread','Medium','2026-09-28','5 giờ','180','1','ổ brioche','Bread flour | 500 | g | để bột trong tủ lạnh từ tối hôm trước\nButter | 250 | g\nEggs | 5 | pcs\nSugar | 60 | g\nSalt | 10 | g\nYeast | 15 | g','1. Trộn bột, trứng, đường\n2. Thêm bơ lạnh từng chút\n3. Ủ lạnh qua đêm\n4. Tạo hình, ủ 90 phút\n5. Nướng 180°C khoảng 30 phút','! Bơ phải lạnh để bột không bị nhão',''],
+['','lesson','Men tươi và men khô','Nguyên liệu, Men','','','','','','','','Men khô dùng ít hơn men tươi.\n## Ghi nhớ\n- Men khô khoảng 1/3 lượng men tươi','','Loại|Men tươi|Men khô\nDạng|Khối ẩm|Hạt mịn']];
+if(await saveFile('baking-notebook-mau.csv',csvText(rows),'text/csv'))toast('Đã tải file CSV mẫu')}
+function parseCsv(t){t=t.replace(/^\uFEFF/,'');const h=t.split(/\r?\n/)[0],d=[',',';','\t'].map(c=>[c,h.split(c).length]).sort((a,b)=>b[1]-a[1])[0][0],R=[];let r=[],c='',q=0;
+for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'){if(t[i+1]=='"'){c+='"';i++}else q=0}else c+=ch}else if(ch=='"')q=1;else if(ch==d){r.push(c);c=''}
+else if(ch=='\n'||ch=='\r'){if(ch=='\r'&&t[i+1]=='\n')i++;r.push(c);c='';R.push(r);r=[]}else c+=ch}
+if(c||r.length){r.push(c);R.push(r)}return R.filter(r=>r.some(x=>x.trim()))}
+function csvIn(t){const R=parseCsv(t),h=R.shift().map(x=>x.trim().toLowerCase());if(!h.includes('name')||!h.includes('type'))throw 0;const o={recipes:[],lessons:[],csv:1};
+const rk=(v,a,d)=>a.find(k=>k.toLowerCase()==v.toLowerCase()||L[k].toLowerCase()==v.toLowerCase())||d,
+dt=v=>{const m=v.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);return m?`${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`:/^\d{4}-\d{2}-\d{2}$/.test(v)?v:''};
+R.forEach(r=>{const g=k=>(r[h.indexOf(k)]||'').trim(),gr=k=>r[h.indexOf(k)]||'',name=g('name');if(!name)return;
+if(/^(lesson|bài)/i.test(g('type')))o.lessons.push({id:g('id')||uid(),title:name,tags:parseTags(g('category')),body:gr('method'),cmp:gr('comparison'),ts:Date.now()});
+else o.recipes.push({id:g('id')||uid(),name,cat:rk(g('category'),CATS,'Bread'),diff:rk(g('difficulty'),['Easy','Medium','Hard'],''),date:dt(g('date_learnt')),time:g('time'),oven:g('oven_c'),yn:g('yield_qty'),yu:g('yield_unit'),
+ings:gr('ingredients').split(/\r?\n/).map(l=>l.split('|').map(x=>x.trim())).filter(p=>p[0]).map(p=>({n:p[0],a:(p[1]||'').replace(',','.'),u:p[2]||(p[1]?'g':''),note:p.slice(3).join(' | ')})),steps:gr('method'),tips:gr('tips'),ts:Date.now()})});
+return o}
+
 function list(){const q=ui.q.trim().toLowerCase(),rec=ui.tab=='recipes',f=rec?ui.cat:ui.tag;
-let a=(rec?db.recipes:db.lessons).filter(x=>(f=='All'||key(x)==f)&&(!q||(rec?x.name+' '+x.ings.map(i=>i.n).join(' '):x.title+' '+x.body).toLowerCase().includes(q)));
+let a=(rec?db.recipes:db.lessons).filter(x=>(f=='All'||(rec?x.cat==f:(x.tags||[]).includes(f)))&&(!q||(rec?x.name+' '+x.ings.map(i=>i.n).join(' '):x.title+' '+x.body+' '+(x.tags||[]).join(' ')).toLowerCase().includes(q)));
 a.sort(ui.sort=='az'?(x,y)=>(x.name||x.title).localeCompare(y.name||y.title):ui.sort=='date'?(x,y)=>(y.date||'').localeCompare(x.date||''):(x,y)=>y.ts-x.ts);
 if(!a.length)return`<div class="empty">${rec?'Chưa có công thức nào. Bấm “+ Công thức mới” để thêm.':'Chưa có bài học nào. Bấm “+ Bài học mới” để thêm.'}</div>`;
-return a.map(x=>{const im=(x.media||[]).find(m=>m.type=='image')||(rec&&db.gallery.find(g=>g.rid==x.id));return`<button class="card c-${key(x)}" data-a="open" data-id="${x.id}"><div class="cov">${im?`<img src="${im.src}" alt="">`:EMO[key(x)]||'🍞'}</div><div class="cb"><span class="badge">${lb(key(x))}</span><h3>${esc(x.name||x.title)}</h3>${rec?`<small>${[x.diff&&lb(x.diff),x.time,x.date&&fd(x.date),x.made&&x.made.length?'Đã làm '+x.made.length+' lần':''].filter(Boolean).map(esc).join(' · ')}</small>`:''}</div></button>`}).join('')}
+return a.map(x=>{const im=(x.media||[]).find(m=>m.type=='image')||(rec&&db.gallery.find(g=>g.rid==x.id));return`<button class="card c-${key(x)}" data-a="open" data-id="${x.id}"><div class="cov">${im?`<img src="${im.src}" alt="">`:EMO[key(x)]||'🍞'}</div><div class="cb">${sv('cBadge')?`<span class="badge">${rec?lb(x.cat):esc((x.tags||[]).join(' · '))}</span>`:''}<h3>${esc(x.name||x.title)}</h3>${rec?`<small>${[sv('cDiff')&&x.diff&&lb(x.diff),sv('cTime')&&x.time,sv('cDate')&&x.date&&fd(x.date),sv('cMade')&&x.made&&x.made.length?'Đã làm '+x.made.length+' lần':'',sv('cOven')&&x.oven&&'🔥 '+x.oven+'°C'].filter(Boolean).map(esc).join(' · ')}</small>`:''}</div></button>`}).join('')}
 
 const IO='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');IO.unobserve(e.target)}}),{threshold:.08}):null;
 function rvl(){document.querySelectorAll('.card,.gt').forEach((el,i)=>{el.classList.add('rv');el.style.transitionDelay=Math.min(i*60,360)+'ms';IO?IO.observe(el):el.classList.add('in')})}
@@ -278,11 +373,11 @@ const gbg=()=>(db.settings||{}).bg||{t:'p',id:'macaron'};
 function applyBg(){const b=gbg(),el=$('#bgl');if(!el)return;document.body.classList.toggle('hb',ui.view=='list'&&!(b.t=='p'&&b.id=='plain'));
 if(b.t=='i'){el.style.backgroundImage=`url("${b.src}")`;el.style.setProperty('--ov','var(--ovi)')}else{el.style.backgroundImage=PB[b.id]||'none';el.style.setProperty('--ov','var(--ovp)')}}
 function bgsw(){const b=gbg();$('#sw').innerHTML=Object.keys(PN).map(k=>`<button class="swb${b.t=='p'&&b.id==k?' on':''}" data-a="bgp" data-id="${k}" title="${PN[k]}" aria-label="${PN[k]}" style="background:${k=='plain'?'var(--card)':PB[k]}"></button>`).join('')+(b.t=='i'?`<button class="swb on" title="Ảnh của bạn" aria-label="Ảnh của bạn" style="background:url('${b.src}') center/cover"></button>`:'')}
-function vList(){const rec=ui.tab=='recipes',f=rec?ui.cat:ui.tag;
-return`<section class="hero"><span class="eyebrow">${rec?'Sổ tay của bạn':'Kiến thức'}</span><button class="lnk" data-a="bgo">Đổi hình nền</button><h1>${rec?'Hôm nay mình nướng gì nào?':'Tất cả những gì mình đã học'}</h1><p>${rec?'Công thức của bạn, kèm ảnh, video và ghi chú.':'Men starter, kỹ thuật, so sánh và mẹo hay.'}</p>${stats(rec)}</section>${nag()}
-<div class="bar"><input id="q" type="search" placeholder="${rec?'Tìm công thức hoặc nguyên liệu':'Tìm bài học'}" value="${esc(ui.q)}" aria-label="Tìm kiếm"><select id="sort" aria-label="Sắp xếp"><option value="new"${ui.sort=='new'?' selected':''}>Mới thêm trước</option>${rec?`<option value="date"${ui.sort=='date'?' selected':''}>Ngày học gần nhất</option>`:''}<option value="az"${ui.sort=='az'?' selected':''}>A → Z</option></select></div>
-<div class="chips">${['All',...(rec?CATS:TAGS)].map(c=>`<button class="chip${c==f?' on':''}" data-a="chip" data-id="${c}">${lb(c)}</button>`).join('')}</div>
-<div class="grid" id="grid">${list()}</div>`}
+function vList(){if(ui.tag!='All'&&!allTags().includes(ui.tag))ui.tag='All';const rec=ui.tab=='recipes',f=rec?ui.cat:ui.tag,w=rec?'hr':'hl',e=T(w,'e'),t=T(w,'t'),d=T(w,'d');
+return`<section class="hero">${e?`<span class="eyebrow">${esc(e)}</span>`:''}${sv('hBg')?'<button class="lnk" data-a="bgo">Đổi hình nền</button>':''}<h1>${esc(t)}</h1>${d?`<p>${esc(d)}</p>`:''}${sv('hStats')?stats(rec):''}</section>${sv('nag')?nag():''}
+${sv('hSearch')?`<div class="bar"><input id="q" type="search" placeholder="${rec?'Tìm công thức hoặc nguyên liệu':'Tìm bài học'}" value="${esc(ui.q)}" aria-label="Tìm kiếm"><select id="sort" aria-label="Sắp xếp"><option value="new"${ui.sort=='new'?' selected':''}>Mới thêm trước</option>${rec?`<option value="date"${ui.sort=='date'?' selected':''}>Ngày học gần nhất</option>`:''}<option value="az"${ui.sort=='az'?' selected':''}>A → Z</option></select></div>`:''}
+${sv('hChips')?`<div class="chips">${['All',...(rec?CATS:allTags())].map(c=>`<button class="chip${c==f?' on':''}" data-a="chip" data-id="${esc(c)}">${esc(lb(c))}</button>`).join('')}</div>`:''}
+<div class="grid v-${B('lay')}" id="grid">${list()}</div>`}
 
 function vDetail(){const x=cur();if(!x){ui.view='list';return vList()}const rec=ui.tab=='recipes';
 const acts=`<div class="row"><button class="btn" data-a="back">Quay lại</button><button class="btn pri" data-a="edit">Sửa</button><button class="btn dng" data-a="del">${ui.conf==x.id?'Bấm lần nữa để xóa':'Xóa'}</button></div>`;
@@ -292,10 +387,10 @@ return`<article class="doc c-${x.cat}">${acts}<span class="badge">${lb(x.cat)}</
 <div class="row"><button class="btn pri" data-a="cook">${ss?'▶ Tiếp tục checklist':'🧑‍🍳 Bắt đầu làm'}</button></div><div id="fct">${facts(x)}</div>${m}
 ${fl?`<div class="scale"><label for="sc">Lượng bột của tôi</label><input id="sc" type="number" inputmode="decimal" min="1" step="any" value="${F(ui.sc&&ui.sc.id==x.id?ui.sc.g:fl).replace(',','.')}"> g <button class="btn" data-a="mul" data-m="0.5">×½</button><button class="btn" data-a="mul" data-m="1">×1</button><button class="btn" data-a="mul" data-m="2">×2</button><button class="btn" data-a="guide">📐 Xem cách tính</button></div>`:''}
 <div id="scv">${tbl(x)}</div>
-${lk.length?`<h2>Bài học liên quan</h2><div class="chips">${lk.map(l=>`<button class="chip" data-a="lesson" data-id="${l.id}">${EMO[l.tag]||''} ${esc(l.title)}</button>`).join('')}</div>`:''}
+${lk.length?`<h2>Bài học liên quan</h2><div class="chips">${lk.map(l=>`<button class="chip" data-a="lesson" data-id="${l.id}">📖 ${esc(l.title)}</button>`).join('')}</div>`:''}
 <h2>Cách làm</h2>${md(mk?st:st.split('\n').filter(z=>z.trim()).map((z,i)=>`${i+1}. ${z}`).join('\n'))}${x.tips?`<h2>Mẹo và lưu ý</h2>${md(x.tips)}`:''}${mine(x)}</article>`}
 const bl0=db.recipes.filter(r=>(r.links||[]).includes(x.id)),bl=bl0.length?`<h2>Dùng trong công thức</h2><div class="chips">${bl0.map(r=>`<button class="chip" data-a="recipe" data-id="${r.id}">${EMO[r.cat]||''} ${esc(r.name)}</button>`).join('')}</div>`:'';const rows=(x.cmp||'').split('\n').filter(l=>l.includes('|')).map(l=>l.split('|').map(c=>c.trim()));
-return`<article class="doc c-${x.tag}">${acts}<span class="badge">${lb(x.tag)}</span><h1>${esc(x.title)}</h1>${gal(x.media)}${md(x.body)}${rows.length?`<h2>So sánh</h2><div class="tw"><table><tr>${rows[0].map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${rows.slice(1).map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>`:''}${bl}</article>`}
+return`<article class="doc c-Lesson">${acts}${(x.tags||[]).map(t=>`<span class="badge">${esc(t)}</span>`).join(' ')}<h1>${esc(x.title)}</h1>${gal(x.media)}${md(x.body)}${rows.length?`<h2>So sánh</h2><div class="tw"><table><tr>${rows[0].map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${rows.slice(1).map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>`:''}${bl}</article>`}
 
 const tbar=id=>`<div class="tb">${[['b','<b>B</b>'],['i','<i>I</i>'],['ul','• Gạch đầu dòng'],['ol','1. Đánh số'],['h','Tiêu đề'],['w','⚠️ Lưu ý']].map(([k,l])=>`<button type="button" data-a="fmt" data-id="${id}" data-k="${k}">${l}</button>`).join('')}</div>`;
 function vForm(){const d=ui.d,rec=ui.tab=='recipes';
@@ -314,7 +409,7 @@ return`<section class="doc f"><h1>${rec?(d.isNew?'Công thức mới':'Sửa cô
 <label for="f-tips">Mẹo và lưu ý</label>${tbar('f-tips')}<textarea id="f-tips">${esc(d.tips)}</textarea>
 <label>Bài học liên quan (tùy chọn)</label>${db.lessons.length?db.lessons.map(l=>`<label class="ck"><input type="checkbox" class="lk" value="${l.id}"${(d.links||[]).includes(l.id)?' checked':''}> ${esc(l.title)}</label>`).join(''):'<p class="note">Chưa có bài học nào.</p>'}`
 :`<label for="f-title">Tiêu đề</label><input id="f-title" value="${esc(d.title)}" placeholder="VD: Cách nuôi men starter">
-<label for="f-tag">Chủ đề</label>${sel('f-tag',TAGS,d.tag)}
+<label for="f-tags">Tag / chủ đề (cách nhau bằng dấu phẩy, tự đặt tùy ý)</label><input id="f-tags" value="${esc((d.tags||[]).join(', '))}" placeholder="VD: Men, Bột ủ, Mẹo">${allTags().length?`<div class="chips" style="margin:.5rem 0 0">${allTags().map(t=>`<button type="button" class="chip" data-a="addtag" data-id="${esc(t)}">+ ${esc(t)}</button>`).join('')}</div>`:''}
 <label for="f-body">Nội dung</label>${tbar('f-body')}<textarea id="f-body" style="min-height:200px">${esc(d.body)}</textarea>
 <label for="f-cmp">Bảng so sánh (tùy chọn; mỗi dòng một hàng, các cột cách nhau bằng dấu |)</label><textarea id="f-cmp" placeholder="Tiêu chí|A|B&#10;Tốc độ|Nhanh|Chậm">${esc(d.cmp)}</textarea>`)
 +med+`<div class="row"><button class="btn pri" data-a="save">Lưu</button><button class="btn" data-a="cancel">Hủy</button></div></section>`}
@@ -323,16 +418,16 @@ if(k=='b'||k=='i'){const w=k=='b'?'**':'*',t=v.slice(s,n)||'chữ';e.value=v.sli
 s=s?v.lastIndexOf('\n',s-1)+1:0;let z=v.indexOf('\n',n);if(z<0)z=v.length;
 const p={ul:'- ',h:'## ',w:'! '}[k],ls=v.slice(s,z).split('\n').map((l,i)=>(k=='ol'?(i+1)+'. ':p)+l.replace(/^(- |## |! |\d+[.)]\s)/,'')).join('\n');
 e.value=v.slice(0,s)+ls+v.slice(z);e.focus();e.setSelectionRange(s,s+ls.length)}
-function render(){document.querySelectorAll('[data-a=tab]').forEach(b=>b.classList.toggle('on',ui.view!='gal'&&b.dataset.id==ui.tab));$('#gnav').classList.toggle('on',ui.view=='gal');$('#new').hidden=ui.view=='gal';
+function render(){document.querySelectorAll('[data-a=tab]').forEach(b=>b.classList.toggle('on',!['gal','set'].includes(ui.view)&&b.dataset.id==ui.tab));$('#gnav').classList.toggle('on',ui.view=='gal');$('#new').hidden=['gal','set','form','cook'].includes(ui.view);
 $('#new').textContent=ui.tab=='recipes'?'+ Công thức mới':'+ Bài học mới';
-$('#app').innerHTML=ui.view=='gal'?vGal():ui.view=='list'?vList():ui.view=='form'?vForm():ui.view=='cook'?vCook():vDetail();side();prog();rvl();applyBg();
+$('#app').innerHTML=ui.view=='set'?vSet():ui.view=='gal'?vGal():ui.view=='list'?vList():ui.view=='form'?vForm():ui.view=='cook'?vCook():vDetail();side();prog();rvl();applyBg();applyPrefs();
 const k=ui.view+ui.id+ui.tab;if(k!=ui.k){ui.k=k;scrollTo(0,0)}}
 
-function sync(){const d=ui.d,g=i=>document.getElementById(i);if(!g('f-cat')&&!g('f-tag'))return;
+function sync(){const d=ui.d,g=i=>document.getElementById(i);if(!g('f-cat')&&!g('f-tags'))return;
 if(ui.tab=='recipes'){Object.assign(d,{oven:g('f-oven').value,yn:g('f-yn').value,yu:g('f-yu').value,links:[...document.querySelectorAll('.lk:checked')].map(e=>e.value),name:g('f-name').value,cat:g('f-cat').value,time:g('f-time').value,diff:g('f-diff').value,date:g('f-date').value,steps:g('f-steps').value,tips:g('f-tips').value,ings:[...document.querySelectorAll('.ing')].map(e=>({n:e.children[0].value,a:e.children[1].value,u:e.children[2].value,note:e.querySelector('.nt').value}))})}
-else Object.assign(d,{title:g('f-title').value,tag:g('f-tag').value,body:g('f-body').value,cmp:g('f-cmp').value})}
+else Object.assign(d,{title:g('f-title').value,tags:parseTags(g('f-tags').value),body:g('f-body').value,cmp:g('f-cmp').value})}
 
-function openForm(x){ui.tab=ui.tab;ui.d=x||(ui.tab=='recipes'?{id:uid(),name:'',cat:'Bread',time:'',oven:'',yn:'',yu:'',links:[],made:[],ings:BASE.map(([n,a])=>({n,a,u:'g'})),steps:'',tips:'',media:[],ts:Date.now(),isNew:1}:{id:uid(),title:'',tag:'Techniques',body:'',ca:'',cb:'',cmp:'',media:[],ts:Date.now(),isNew:1});ui.id=ui.d.id;ui.view='form';render()}
+function openForm(x){ui.tab=ui.tab;ui.d=x||(ui.tab=='recipes'?{id:uid(),name:'',cat:'Bread',time:'',oven:'',yn:'',yu:'',links:[],made:[],ings:BASE.map(([n,a])=>({n,a,u:'g'})),steps:'',tips:'',media:[],ts:Date.now(),isNew:1}:{id:uid(),title:'',tags:[],body:'',ca:'',cb:'',cmp:'',media:[],ts:Date.now(),isNew:1});ui.id=ui.d.id;ui.view='form';render()}
 
 /* export via the viewer's download prompt (works in the published page) */
 async function exportData(){const prev=db.meta.lastBackup;db.meta.lastBackup=Date.now();const data=JSON.stringify(db);let ok=0,how='';
@@ -341,8 +436,10 @@ if(!ok){try{const l=document.createElement('a');l.href=URL.createObjectURL(new B
 if(ok){await save();render();toast('Đã xuất bản sao lưu.'+how)}else{db.meta.lastBackup=prev;toast('Không xuất được')}}
 
 document.addEventListener('click',async e=>{const t=e.target.closest('[data-a]');if(!t)return;const a=t.dataset.a,id=t.dataset.id,i=+t.dataset.i,rec=ui.tab=='recipes';
-if(a!='del'&&a!='ccl'&&a!='tk')ui.conf=null;
-if(a=='tab'){ui.ret=null;ui.tab=id;ui.view='list';ui.q='';ui.sort='new'}
+if(a!='del'&&a!='ccl'&&a!='tk'&&a!='rst')ui.conf=null;
+if(a=='home'){ui.ret=null;ui.tab='recipes';ui.view='list';ui.q=''}
+else if(a=='set'){ui.ret=null;ui.view='set'}
+else if(a=='tab'){ui.ret=null;ui.tab=id;ui.view='list';ui.q='';ui.sort='new'}
 else if(a=='chip'){ui[rec?'cat':'tag']=id}
 else if(a=='open'){ui.id=id;ui.view='detail';ui.ret=null;ui.sc=null}
 else if(a=='back'&&ui.ret){Object.assign(ui,ui.ret);ui.ret=null}
@@ -368,8 +465,8 @@ else if(a=='ccl'){if(ui.conf!='c'+ui.id){ui.conf='c'+ui.id;render();return}delet
 else if(a=='useoven'){sync();ui.d.oven=t.dataset.v}
 else if(a=='impok'){db=norm(ui.pend);ui.pend=null;await save();ui.view='list';toast('Đã nhập bản sao lưu')}
 else if(a=='impmg'){const n=ui.pend,ar=0,br=0;let ra=0,ru=0,la=0,lu=0;
- (n.recipes||[]).forEach(r=>{const i=db.recipes.findIndex(x=>x.id==r.id);if(i>-1){const old=db.recipes[i];db.recipes[i]=Object.assign({},old,r,{made:old.made||r.made||[]});ru++}else{db.recipes.push(Object.assign({made:[],links:[]},r));ra++}});
- (n.lessons||[]).forEach(l=>{const i=db.lessons.findIndex(x=>x.id==l.id);if(i>-1){db.lessons[i]=Object.assign({},db.lessons[i],l);lu++}else{db.lessons.push(l);la++}});
+ (n.recipes||[]).forEach(r=>{let i=db.recipes.findIndex(x=>x.id==r.id);if(i<0&&n.csv)i=db.recipes.findIndex(x=>x.name.trim().toLowerCase()==r.name.toLowerCase());if(i>-1){const old=db.recipes[i];db.recipes[i]=Object.assign({},old,r,{id:old.id,made:old.made||r.made||[]});ru++}else{db.recipes.push(Object.assign({made:[],links:[],media:[]},r));ra++}});
+ (n.lessons||[]).forEach(l=>{let i=db.lessons.findIndex(x=>x.id==l.id);if(i<0&&n.csv)i=db.lessons.findIndex(x=>x.title.trim().toLowerCase()==l.title.toLowerCase());if(i>-1){db.lessons[i]=Object.assign({},db.lessons[i],l,{id:db.lessons[i].id});lu++}else{db.lessons.push(Object.assign({media:[],ca:'',cb:''},l));la++}});
  (n.gallery||[]).forEach(g=>{if(!db.gallery.some(x=>x.id==g.id))db.gallery.push(g)});
  db=norm(db);ui.pend=null;await save();ui.view='list';toast(`Đã gộp: +${ra} công thức mới, cập nhật ${ru} · +${la} bài học mới, cập nhật ${lu}`)}
 else if(a=='impno')ui.pend=null;
@@ -385,6 +482,14 @@ else if(a=='lbp'||a=='lbn'){ln(a=='lbn'?1:-1);return}
 else if(a=='lbd'){db.gallery=db.gallery.filter(x=>x.id!=ui.lbid);lc();await save();toast('Đã xóa ảnh')}
 else if(a=='glink'){const x=await fromLink($('#gurl').value);if(x){db.gallery.unshift({id:uid(),cap:'',rid:'',ts:Date.now(),...x});await save();toast('Đã thêm ảnh')}}
 else if(a=='furl'){sync();const x=await fromLink($('#f-url').value);if(x)ui.d.media.push({type:'image',...x})}
+else if(a=='addtag'){sync();if(!ui.d.tags.includes(id))ui.d.tags.push(id)}
+else if(a=='lay'||a=='ac'||a=='fn'){await pset(a=='ac'?'ac':a,id)}
+else if(a=='thm'){theme(id)}
+else if(a=='emo'){await pset('ic',{t:'e',v:id})}
+else if(a=='icreset'){await pset('ic',SD.ic)}
+else if(a=='rst'){if(ui.conf!='rst'){ui.conf='rst';render();return}db.settings={bg:db.settings.bg};ui.conf=null;await save();toast('Đã đặt lại cài đặt')}
+else if(a=='csvx')return exportCsv();
+else if(a=='csvt')return csvTemplate();
 else if(a=='export')return exportData();
 render()});
 
@@ -393,9 +498,13 @@ document.addEventListener('change',async e=>{const t=e.target;
 if(t.id=='lbc'||t.id=='lbt'){const g=db.gallery.find(x=>x.id==ui.lbid);if(g){t.id=='lbc'?g.cap=t.value:g.rid=t.value;await save();render()}}
 else if(t.id=='gfile'){await addPhotos(t.files);t.value=''}
 else if(t.id=='bgfile'){const f=t.files[0];if(f){try{db.settings.bg={t:'i',src:await shrink(f,1920)};await save();bgsw();render();toast('Đã đổi hình nền')}catch(x){toast(x.message)}}t.value=''}
+else if(t.dataset.s){const[a,b]=t.dataset.s.split('.');if(b)(db.settings[a]=db.settings[a]||{})[b]=t.value;else db.settings[a]=t.value;await save();applyPrefs()}
+else if(t.dataset.sh){(db.settings.sh=db.settings.sh||{})[t.dataset.sh]=t.checked;await save();applyPrefs()}
+else if(t.id=='s-emo'){const v=t.value.trim();if(v){const g=window.Intl&&Intl.Segmenter?[...new Intl.Segmenter(undefined,{granularity:'grapheme'}).segment(v)][0].segment:Array.from(v)[0];await pset('ic',{t:'e',v:g});render()}}
+else if(t.id=='s-icf'){try{await pset('ic',{t:'i',src:await sq(t.files[0])});render();toast('Đã đổi icon')}catch(x){toast(x.message)}t.value=''}
 else if(t.id=='sort'){ui.sort=t.value;$('#grid').innerHTML=list()}
 else if(t.id=='files'){sync();for(const f of t.files){try{const v=f.type.startsWith('video');if(v&&f.size>25e6)throw Error('Video quá 25 MB, hãy cắt ngắn trước nhé');ui.d.media.push({type:v?'video':'image',src:v?await rd(f):await shrink(f)})}catch(x){toast(x.message)}}render()}
-else if(t.id=='imp'){try{const j=JSON.parse(await t.files[0].text());if(!Array.isArray(j.recipes)||!Array.isArray(j.lessons))throw 0;ui.pend=j;render();scrollTo(0,0)}catch(x){toast('Tệp này không phải bản sao lưu của Sổ tay làm bánh')}t.value=''}});
+else if(t.id=='imp'||t.classList.contains('impf')){const f=t.files[0];try{const tx=await f.text(),j=/\.(csv|txt)$/i.test(f.name)||!/^\s*[{[]/.test(tx)?csvIn(tx):JSON.parse(tx);if(!Array.isArray(j.recipes)||!Array.isArray(j.lessons))throw 0;ui.pend=j;render();scrollTo(0,0)}catch(x){toast('Không đọc được tệp. Hãy dùng bản sao lưu JSON hoặc CSV theo file mẫu')}t.value=''}});
 
 document.addEventListener('keydown',e=>{if(!ui.lbid)return;if(e.key=='Escape')lc();else if(e.key=='ArrowRight')ln(1);else if(e.key=='ArrowLeft')ln(-1)});
 document.addEventListener('paste',e=>{if(ui.view!='gal'||!e.clipboardData||e.target.id=='gurl')return;addPhotos([...e.clipboardData.items].filter(x=>x.type.startsWith('image')).map(x=>x.getAsFile()))});
