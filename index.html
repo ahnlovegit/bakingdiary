@@ -181,6 +181,21 @@ main{padding:1rem .9rem 5.5rem}.hero{padding-top:1.2rem}.lnk{position:static;mar
 .chip,.tb button{min-height:40px}.facts span{padding:.6rem 1.2rem .6rem 0;font-size:1.1rem}.stats{gap:1.4rem}
 }
 </style>
+<style id="v6">
+.doc{max-width:1040px;margin-left:auto;margin-right:auto}.doc h1{font-size:clamp(1.8rem,4vw,2.4rem)}
+.hero-img{display:block;width:100%;max-height:300px;aspect-ratio:16/9;object-fit:cover;border-radius:10px;margin:.8rem 0}.hero-ban{height:110px;font-size:3.2rem}
+.facts span{padding:.4rem 1.4rem .4rem 0;font-size:1.05rem}
+.cols{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:2.2rem;align-items:start;margin-top:1rem}
+.pi{position:sticky;top:calc(4.5rem + env(safe-area-inset-top,0px));max-height:calc(100vh - 6rem);overflow:auto}
+.pm{max-width:68ch}.pi h2,.pm h2:first-child{font-size:1.25rem;border-top:0;padding-top:0;margin:0 0 .6rem}.pm h2{margin-top:1.4rem}
+.pi th,.pi td{padding:.35rem .5rem;font-size:.95rem}.pi .scale{padding:.5rem .7rem;gap:.35rem}.pi .scale input{width:84px}.pi .scale .btn{padding:.35rem .8rem;min-height:0;font-size:.9rem}
+.nn2{font-size:.82rem;color:var(--crust);font-weight:600;line-height:1.35}
+.dtabs{display:none;gap:.5rem;margin:1rem 0 .4rem}.dtabs .chip{flex:1;text-align:center;min-height:44px}
+.gal img,.gal video{max-height:300px}.gal>:first-child{max-height:300px}
+.gal2{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0}.gal2 img,.gal2 video{height:110px;width:auto;max-width:170px;border-radius:8px;object-fit:cover}
+.doc .gg{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.6rem}
+@media (max-width:899px){.cols{display:block}.pi{position:static;max-height:none;overflow:visible}.dtabs{display:flex}.t-ing .pm,.t-met .pi{display:none}.hero-img{max-height:220px}}
+</style>
 </head>
 <body>
 <div id="bgl" aria-hidden="true"></div>
@@ -256,7 +271,7 @@ function norm(d){d.settings=d.settings||{};d.gallery=d.gallery||[];d.sessions=d.
 function facts(x){const f=fac(x),y=+x.yn?`<span>🍞 ${f!=1?'≈ ':''}${F(Math.round(x.yn*f*2)/2)} ${esc(x.yu||'')}</span>`:'',o=x.oven?`<span>🔥 ${esc(x.oven)}°C</span>`:'';return o||y?`<div class="facts">${o}${y}</div>`:''}
 function tbl(x){const fl=flr(x),f=fac(x),hn=x.ings.some(i=>i.note),e=x.ings.find(i=>!/flour/i.test(i.n)&&+i.a&&/^(g|ml)$/i.test(i.u));
 const calc=fl&&f!=1?`<p class="calc">Hệ số = ${F(ui.sc.g)} ÷ ${F(fl)} = ${F(f,2)}${e?` · ${esc(e.n)}: ${F(+e.a)} × ${F(f,2)} = ${scl(e,f)} ${esc(e.u)}`:''}</p>`:'';
-return`<h2>Nguyên liệu</h2>${calc}<div class="tw"><table><tr><th>Nguyên liệu</th><th class="n">Khối lượng</th>${fl?'<th class="n">Baker’s %</th>':''}${hn?'<th>📝 Ghi chú</th>':''}</tr>${x.ings.map(i=>`<tr><td>${esc(i.n)}</td><td class="n">${+i.a?scl(i,f):esc(i.a)} ${esc(i.u)}${f!=1&&+i.a?` <small class="note">(gốc ${esc(i.a)})</small>`:''}</td>${fl?`<td class="n">${+i.a?Math.round(i.a/fl*1000)/10+'%':''}</td>`:''}${hn?`<td class="nn">${esc(i.note||'')}</td>`:''}</tr>`).join('')}</table></div>${fl?'<p class="note">Baker’s % = khối lượng nguyên liệu ÷ tổng khối lượng bột (tính theo công thức gốc).</p>':''}`}
+return`<h2>Nguyên liệu</h2>${calc}<div class="tw"><table><tr><th>Nguyên liệu</th><th class="n">Khối lượng</th>${fl?'<th class="n">Baker’s %</th>':''}</tr>${x.ings.map(i=>`<tr><td>${esc(i.n)}${i.note?`<div class="nn2">📝 ${esc(i.note)}</div>`:''}</td><td class="n">${+i.a?scl(i,f):esc(i.a)} ${esc(i.u)}${f!=1&&+i.a?` <small class="note">(gốc ${esc(i.a)})</small>`:''}</td>${fl?`<td class="n">${+i.a?Math.round(i.a/fl*1000)/10+'%':''}</td>`:''}</tr>`).join('')}</table></div>${fl?'<p class="note">Baker’s % = khối lượng nguyên liệu ÷ tổng khối lượng bột (tính theo công thức gốc).</p>':''}`}
 function upd(){const x=cur();if(!x)return;$('#fct').innerHTML=facts(x);$('#scv').innerHTML=tbl(x)}
 function nag(){const m=db.meta||{},d=m.lastBackup?Math.floor((Date.now()-m.lastBackup)/864e5):0,old=m.lastBackup?d>=7:(!m.created||Date.now()-m.created>2*864e5);
 return old?`<div class="warn nag"><span>💾 ${m.lastBackup?'Đã '+d+' ngày chưa sao lưu.':'Bạn chưa sao lưu lần nào.'} Dữ liệu chỉ nằm trong trình duyệt này, hãy xuất một bản để phòng khi mất dữ liệu.</span><button class="btn pri" data-a="export">Xuất bản sao lưu</button></div>`:''}
@@ -275,6 +290,8 @@ return`<section class="doc"><div class="row"><button class="btn" data-a="cback">
 /* v5: settings, favicon, csv */
 const allTags=()=>[...new Set(db.lessons.flatMap(l=>l.tags||[]))].sort((a,b)=>a.localeCompare(b,'vi')),parseTags=v=>[...new Set(String(v).split(/[,;|]/).map(x=>x.replace(/["<>]/g,'').trim()).filter(Boolean))];
 EMO.Lesson='📖';
+const heroOf=x=>{const im=(x.media||[]).find(m=>m.type=='image')||db.gallery.find(g=>g.rid==x.id);return im?`<img class="hero-img" src="${im.src}" alt="">`:`<div class="ban hero-ban">${EMO[x.cat]||'🍞'}</div>`},
+restOf=x=>{const f=(x.media||[]).find(m=>m.type=='image'),r=(x.media||[]).filter(m=>m!==f);return r.length?`<div class="gal2">${r.map(m=>m.type=='video'?`<video src="${m.src}" controls playsinline></video>`:`<img src="${m.src}" alt="">`).join('')}</div>`:''};
 const SD={b1:'Sổ tay',b2:'làm bánh',ic:{t:'e',v:'🥖'},hr:{e:'Sổ tay của bạn',t:'Hôm nay mình nướng gì nào?',d:'Công thức của bạn, kèm ảnh, video và ghi chú.'},hl:{e:'Kiến thức',t:'Tất cả những gì mình đã học',d:'Men starter, kỹ thuật, so sánh và mẹo hay.'},lay:'card',ac:'pink',fn:'serif'};
 const ST=()=>db.settings||{},B=k=>ST()[k]??SD[k],T=(w,k)=>(ST()[w]||{})[k]??SD[w][k],sv=k=>{const v=(ST().sh||{})[k];return v===undefined?k!='cOven':v};
 const SHOW=[['cBadge','Loại bánh / chủ đề','c'],['cDiff','Độ khó','c'],['cTime','Tổng thời gian','c'],['cDate','Ngày học','c'],['cMade','Số lần đã làm','c'],['cOven','Nhiệt độ lò','c'],['hStats','Thống kê ở đầu trang','h'],['hSearch','Ô tìm kiếm và sắp xếp','h'],['hChips','Bộ lọc theo loại','h'],['hBg','Nút “Đổi hình nền”','h'],['nGal','Tab Thư viện ảnh','h'],['nLes','Tab Bài học','h'],['nag','Nhắc sao lưu','h']];
@@ -383,12 +400,10 @@ function vDetail(){const x=cur();if(!x){ui.view='list';return vList()}const rec=
 const acts=`<div class="row"><button class="btn" data-a="back">Quay lại</button><button class="btn pri" data-a="edit">Sửa</button><button class="btn dng" data-a="del">${ui.conf==x.id?'Bấm lần nữa để xóa':'Xóa'}</button></div>`;
 const m=gal(x.media)||`<div class="ban">${EMO[key(x)]||'🍞'}</div>`;
 if(rec){const fl=flr(x),lk=(x.links||[]).map(i=>db.lessons.find(l=>l.id==i)).filter(Boolean),st=x.steps||'',mk=/^(- |\d+[.)]\s|## |! )/m.test(st),n=(x.made||[]).length,ss=db.sessions[x.id];
-return`<article class="doc c-${x.cat}">${acts}<span class="badge">${lb(x.cat)}</span><h1>${esc(x.name)}</h1><div class="note">${x.diff?DF[x.diff]+' '+lb(x.diff)+' · ':''}${x.time?'⏱ '+esc(x.time)+' · ':''}${n?'✅ Đã làm '+n+' lần · gần nhất '+fdt(x.made[n-1])+' · ':''}${x.date?'📅 Đã học: '+fd(x.date):''}</div>
-<div class="row"><button class="btn pri" data-a="cook">${ss?'▶ Tiếp tục checklist':'🧑‍🍳 Bắt đầu làm'}</button></div><div id="fct">${facts(x)}</div>${m}
-${fl?`<div class="scale"><label for="sc">Lượng bột của tôi</label><input id="sc" type="number" inputmode="decimal" min="1" step="any" value="${F(ui.sc&&ui.sc.id==x.id?ui.sc.g:fl).replace(',','.')}"> g <button class="btn" data-a="mul" data-m="0.5">×½</button><button class="btn" data-a="mul" data-m="1">×1</button><button class="btn" data-a="mul" data-m="2">×2</button><button class="btn" data-a="guide">📐 Xem cách tính</button></div>`:''}
-<div id="scv">${tbl(x)}</div>
-${lk.length?`<h2>Bài học liên quan</h2><div class="chips">${lk.map(l=>`<button class="chip" data-a="lesson" data-id="${l.id}">📖 ${esc(l.title)}</button>`).join('')}</div>`:''}
-<h2>Cách làm</h2>${md(mk?st:st.split('\n').filter(z=>z.trim()).map((z,i)=>`${i+1}. ${z}`).join('\n'))}${x.tips?`<h2>Mẹo và lưu ý</h2>${md(x.tips)}`:''}${mine(x)}</article>`}
+return`<article class="doc c-${x.cat} t-${ui.dt||'ing'}">${acts}<span class="badge">${lb(x.cat)}</span><h1>${esc(x.name)}</h1><div class="note">${x.diff?DF[x.diff]+' '+lb(x.diff)+' · ':''}${x.time?'⏱ '+esc(x.time)+' · ':''}${n?'✅ Đã làm '+n+' lần · gần nhất '+fdt(x.made[n-1])+' · ':''}${x.date?'📅 Đã học: '+fd(x.date):''}</div>
+<div class="row"><button class="btn pri" data-a="cook">${ss?'▶ Tiếp tục checklist':'🧑‍🍳 Bắt đầu làm'}</button></div><div id="fct">${facts(x)}</div>${heroOf(x)}<div class="dtabs"><button class="chip${ui.dt!='met'?' on':''}" data-a="dtab" data-id="ing">Nguyên liệu</button><button class="chip${ui.dt=='met'?' on':''}" data-a="dtab" data-id="met">Cách làm</button></div><div class="cols"><div class="pi">${fl?`<div class="scale"><label for="sc">Lượng bột của tôi</label><input id="sc" type="number" inputmode="decimal" min="1" step="any" value="${F(ui.sc&&ui.sc.id==x.id?ui.sc.g:fl).replace(',','.')}"> g <button class="btn" data-a="mul" data-m="0.5">×½</button><button class="btn" data-a="mul" data-m="1">×1</button><button class="btn" data-a="mul" data-m="2">×2</button><button class="btn" data-a="guide">📐 Xem cách tính</button></div>`:''}
+<div id="scv">${tbl(x)}</div></div><div class="pm">${lk.length?`<h2>Bài học liên quan</h2><div class="chips">${lk.map(l=>`<button class="chip" data-a="lesson" data-id="${l.id}">📖 ${esc(l.title)}</button>`).join('')}</div>`:''}
+<h2>Cách làm</h2>${md(mk?st:st.split('\n').filter(z=>z.trim()).map((z,i)=>`${i+1}. ${z}`).join('\n'))}${x.tips?`<h2>Mẹo và lưu ý</h2>${md(x.tips)}`:''}</div></div>${restOf(x)}${mine(x)}</article>`}
 const bl0=db.recipes.filter(r=>(r.links||[]).includes(x.id)),bl=bl0.length?`<h2>Dùng trong công thức</h2><div class="chips">${bl0.map(r=>`<button class="chip" data-a="recipe" data-id="${r.id}">${EMO[r.cat]||''} ${esc(r.name)}</button>`).join('')}</div>`:'';const rows=(x.cmp||'').split('\n').filter(l=>l.includes('|')).map(l=>l.split('|').map(c=>c.trim()));
 return`<article class="doc c-Lesson">${acts}${(x.tags||[]).map(t=>`<span class="badge">${esc(t)}</span>`).join(' ')}<h1>${esc(x.title)}</h1>${gal(x.media)}${md(x.body)}${rows.length?`<h2>So sánh</h2><div class="tw"><table><tr>${rows[0].map(c=>`<th>${esc(c)}</th>`).join('')}</tr>${rows.slice(1).map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</table></div>`:''}${bl}</article>`}
 
@@ -482,6 +497,7 @@ else if(a=='lbp'||a=='lbn'){ln(a=='lbn'?1:-1);return}
 else if(a=='lbd'){db.gallery=db.gallery.filter(x=>x.id!=ui.lbid);lc();await save();toast('Đã xóa ảnh')}
 else if(a=='glink'){const x=await fromLink($('#gurl').value);if(x){db.gallery.unshift({id:uid(),cap:'',rid:'',ts:Date.now(),...x});await save();toast('Đã thêm ảnh')}}
 else if(a=='furl'){sync();const x=await fromLink($('#f-url').value);if(x)ui.d.media.push({type:'image',...x})}
+else if(a=='dtab'){ui.dt=id}
 else if(a=='addtag'){sync();if(!ui.d.tags.includes(id))ui.d.tags.push(id)}
 else if(a=='lay'||a=='ac'||a=='fn'){await pset(a=='ac'?'ac':a,id)}
 else if(a=='thm'){theme(id)}
